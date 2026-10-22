@@ -1,0 +1,7 @@
+name = "daylight-study-api"
+main = "index.js"
+compatibility_date = "2026-10-22"
+
+[vars]
+# Replace with the GitHub Pages origin, for example https://yourname.github.io
+ALLOWED_ORIGIN = "https://YOUR_GITHUB_USERNAME.github.io"
