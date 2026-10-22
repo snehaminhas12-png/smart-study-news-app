@@ -1,0 +1,73 @@
+DAYLIGHT SMART STUDY APP — START HERE
+
+WHAT YOU NEED
+- This project ZIP file, extracted on your computer.
+- A GitHub account.
+- GitHub Desktop (free) to upload the files without using commands.
+
+IMPORTANT
+Do not upload only index.html. Keep the complete folder and its subfolders in place. The website needs the CSS, JavaScript, GitHub workflow, and worker folders too.
+
+PART 1 — DOWNLOAD AND UNZIP THE APP
+1. Download smart-study-news-app.zip.
+2. In File Explorer, right-click the ZIP and choose Extract All.
+3. You will get a folder named smart-study-news-app. Keep it somewhere easy to find, such as Downloads.
+
+PART 2 — CREATE A GITHUB REPOSITORY AND UPLOAD THE FILES
+1. If you do not have a GitHub account, create one at https://github.com/signup.
+2. Install GitHub Desktop from https://desktop.github.com/ and sign in to your GitHub account.
+3. In GitHub Desktop, choose File > New repository.
+4. Enter this name: smart-study-news-app
+5. Choose a local path where GitHub Desktop should keep projects, such as Documents\GitHub. GitHub Desktop will create a new smart-study-news-app folder inside that path.
+6. Leave the options to add a README, .gitignore, and license unchecked, because this project already has its own files. Click Create repository.
+7. Open the newly created local smart-study-news-app folder in File Explorer. Copy everything inside the extracted project folder into this new repository folder. Copy the hidden .github folder too. If Windows asks about replacing README.md or .gitignore, choose Replace in destination.
+8. Return to GitHub Desktop. The project files should appear under Changes.
+9. In the lower-left box, type a short message such as: Add Smart Study website.
+10. Click Commit to main.
+11. Click Publish repository near the top. For a public website hosted free on GitHub Pages, leave Keep this code private unchecked, then click Publish repository.
+
+PART 3 — TURN ON GITHUB PAGES
+1. On GitHub Desktop, choose Repository > View on GitHub.
+2. On the GitHub website, open the repository's Settings tab.
+3. In the left menu, choose Pages.
+4. Under Build and deployment, choose GitHub Actions as the source.
+5. Open the Actions tab. Wait for the workflow named Deploy Daylight to GitHub Pages to finish with a green check.
+6. Return to Settings > Pages. GitHub will show the website link. It usually looks like:
+   https://YOUR-GITHUB-NAME.github.io/smart-study-news-app/
+7. Open the link. Sign in with the demo details shown below.
+
+DEMO SIGN-IN
+Email: sneha.minhas@mail.com
+Password: Study@123
+
+The app works with sample study facts right away. Demo sign-in and saved progress are stored in your browser; this is a class-project demonstration, not a real secure account system.
+
+PART 4 — OPTIONAL GEMINI AI SETUP
+Skip this part if sample facts are enough. For Gemini facts you need a Google AI Studio API key and a Cloudflare Worker. The key must stay in Cloudflare and must never be pasted into a website file or GitHub.
+
+1. Create a Gemini API key at https://aistudio.google.com/app/apikey.
+2. Create or sign in to a Cloudflare account at https://dash.cloudflare.com/.
+3. Install Node.js from https://nodejs.org/ if it is not already installed. Restart the computer after installation if Windows asks.
+4. In the project folder, open the worker folder. Click the address bar in File Explorer, type powershell, and press Enter. A terminal will open in the worker folder.
+5. Type this command and press Enter:
+   npx wrangler login
+   A browser window will open. Sign in to Cloudflare and approve the Wrangler connection.
+6. Type:
+   npx wrangler secret put GEMINI_API_KEY
+   When asked, paste the key from Google AI Studio and press Enter. The key is stored as a secret on Cloudflare.
+7. Open worker\wrangler.toml in Notepad. Replace YOUR_GITHUB_USERNAME in the ALLOWED_ORIGIN line with your GitHub name, save the file, and close Notepad. Example: https://minha.github.io
+8. In the same terminal, type:
+   npx wrangler deploy
+   Wrangler will show the deployed Worker address. Copy that address; it ends with workers.dev.
+9. Open assets\js\config.js in Notepad. Replace the empty apiBaseUrl value with the Worker address, keeping the quotation marks. Example:
+   window.APP_CONFIG = { apiBaseUrl: "https://daylight-study-api.your-account.workers.dev" };
+   Save and close the file.
+10. Open GitHub Desktop. It will show the two changed files. Enter a summary, click Commit to main, then click Push origin. GitHub Pages will update automatically.
+
+Google's free Gemini access has usage limits and terms that may change. See https://ai.google.dev/gemini-api/docs/pricing. The app falls back to sample facts if Gemini is not configured or temporarily unavailable.
+
+IF SOMETHING GOES WRONG
+- If the Pages link shows 404, wait a minute, then check Settings > Pages and Actions for a red error.
+- If the page loads without styles, make sure you copied the contents of the extracted project folder, including the assets folder, not just the index.html file.
+- If Gemini says it cannot connect, confirm the Cloudflare Worker was deployed, the GitHub origin in worker\wrangler.toml is correct, and assets\js\config.js contains the Worker address.
+- To run on your own computer, install Node.js, open a terminal in the project folder, run `node server.mjs`, and visit http://localhost:3000/login.
